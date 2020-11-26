@@ -146,8 +146,7 @@ class OpenAIGym(Environment):
                 kwargs=_kwargs,
             )
             assert level in cls.levels()
-        env = gym.make(id=level, **kwargs), max_episode_steps
-        return Monitor(env, "./video", force=True)[0]
+        return gym.make(id=level, **kwargs), max_episode_steps
 
     def __init__(
         self,
@@ -265,7 +264,8 @@ class OpenAIGym(Environment):
 
     def execute(self, actions):
         if self.visualize:
-            self.environment.render()
+            env = self.environment
+            Monitor(env, "./video", force=True).render()
         actions = OpenAIGym.unflatten_action(action=actions)
         states, reward, terminal, _ = self.environment.step(actions)
         self.timestep += 1
