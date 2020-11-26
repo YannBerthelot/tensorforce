@@ -264,8 +264,6 @@ class OpenAIGym(Environment):
 
     def execute(self, actions):
         if self.visualize:
-            # env = self.environment
-            # Monitor(env, "./video", force=True)
             self.environment.render()
         actions = OpenAIGym.unflatten_action(action=actions)
         states, reward, terminal, _ = self.environment.step(actions)
