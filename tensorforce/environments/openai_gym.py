@@ -147,7 +147,7 @@ class OpenAIGym(Environment):
             )
             assert level in cls.levels()
         env = gym.make(id=level, **kwargs), max_episode_steps
-        return Monitor(env, "./video", force=True)
+        return Monitor(env, "./video", force=True)[0]
 
     def __init__(
         self,
